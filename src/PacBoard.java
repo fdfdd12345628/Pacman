@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class PacBoard extends JPanel{
 
@@ -115,20 +116,20 @@ public class PacBoard extends JPanel{
         mapSegments[0] = null;
         for(int ms=1;ms<28;ms++){
             try {
-                mapSegments[ms] = ImageIO.read(this.getClass().getResource("resources/images/map segments/"+ms+".png"));
+                mapSegments[ms] = ImageIO.read(Objects.requireNonNull(this.getClass().getResource("resources/images/map segments/" + ms + ".png")));
             }catch(Exception e){}
         }
 
         pfoodImage = new Image[5];
         for(int ms=0 ;ms<5;ms++){
             try {
-                pfoodImage[ms] = ImageIO.read(this.getClass().getResource("resources/images/food/"+ms+".png"));
+                pfoodImage[ms] = ImageIO.read(Objects.requireNonNull(this.getClass().getResource("resources/images/food/" + ms + ".png")));
             }catch(Exception e){}
         }
         try{
-            foodImage = ImageIO.read(this.getClass().getResource("resources/images/food.png"));
-            goImage = ImageIO.read(this.getClass().getResource("resources/images/gameover.png"));
-            vicImage = ImageIO.read(this.getClass().getResource("resources/images/victory.png"));
+            foodImage = ImageIO.read(Objects.requireNonNull(this.getClass().getResource("resources/images/food.png")));
+            goImage = ImageIO.read(Objects.requireNonNull(this.getClass().getResource("resources/images/gameover.png")));
+            vicImage = ImageIO.read(Objects.requireNonNull(this.getClass().getResource("resources/images/victory.png")));
             //pfoodImage = ImageIO.read(this.getClass().getResource("/images/pfood.png"));
         }catch(Exception e){}
 

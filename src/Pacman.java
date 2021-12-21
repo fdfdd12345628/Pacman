@@ -7,6 +7,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class Pacman implements KeyListener{
 
@@ -43,11 +44,11 @@ public class Pacman implements KeyListener{
         todoMove = moveType.NONE;
 
         try {
-            pac[0] = ImageIO.read(this.getClass().getResource("resources/images/pac/pac0.png"));
-            pac[1] = ImageIO.read(this.getClass().getResource("resources/images/pac/pac1.png"));
-            pac[2] = ImageIO.read(this.getClass().getResource("resources/images/pac/pac2.png"));
-            pac[3] = ImageIO.read(this.getClass().getResource("resources/images/pac/pac3.png"));
-            pac[4] = ImageIO.read(this.getClass().getResource("resources/images/pac/pac4.png"));
+            pac[0] = ImageIO.read(Objects.requireNonNull(this.getClass().getResource("resources/images/pac/pac0.png")));
+            pac[1] = ImageIO.read(Objects.requireNonNull(this.getClass().getResource("resources/images/pac/pac1.png")));
+            pac[2] = ImageIO.read(Objects.requireNonNull(this.getClass().getResource("resources/images/pac/pac2.png")));
+            pac[3] = ImageIO.read(Objects.requireNonNull(this.getClass().getResource("resources/images/pac/pac3.png")));
+            pac[4] = ImageIO.read(Objects.requireNonNull(this.getClass().getResource("resources/images/pac/pac4.png")));
         }catch(IOException e){
             System.err.println("Cannot Read Images !");
         }

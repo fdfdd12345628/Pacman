@@ -127,7 +127,7 @@ public class BFSFinder {
             t = mazeCellTable[ttx][tty];
         }
 
-        if (x == tl.x - 1 && y == tl.y) {
+        if (x == Objects.requireNonNull(tl).x - 1 && y == tl.y) {
             return moveType.RIGHT;
         }
         if (x == tl.x + 1 && y == tl.y) {

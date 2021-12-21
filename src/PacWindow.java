@@ -4,6 +4,7 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class PacWindow extends JFrame {
@@ -76,7 +77,7 @@ public class PacWindow extends JFrame {
 
     public int[][] loadMap(int mx,int my,String relPath){
         try {
-            Scanner scn = new Scanner(this.getClass().getResourceAsStream(relPath));
+            Scanner scn = new Scanner(Objects.requireNonNull(this.getClass().getResourceAsStream(relPath)));
             int[][] map;
             map = new int[mx][my];
             for(int y=0;y<my;y++){
@@ -94,7 +95,7 @@ public class PacWindow extends JFrame {
     public MapData getMapFromResource(String relPath){
         String mapStr = "";
         try {
-            Scanner scn = new Scanner(this.getClass().getResourceAsStream(relPath));
+            Scanner scn = new Scanner(Objects.requireNonNull(this.getClass().getResourceAsStream(relPath)));
             StringBuilder sb = new StringBuilder();
             String line;
             while(scn.hasNextLine()){

@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.Objects;
 
 public class StartWindow extends JFrame {
 
@@ -15,7 +16,7 @@ public class StartWindow extends JFrame {
 
         ImageIcon logo = new ImageIcon();
         try {
-            logo = new ImageIcon(ImageIO.read(this.getClass().getResource("/resources/images/pacman_logo.png")));
+            logo = new ImageIcon(ImageIO.read(Objects.requireNonNull(this.getClass().getResource("/resources/images/pacman_logo.png"))));
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -23,7 +24,7 @@ public class StartWindow extends JFrame {
         //Register Custom fonts
         try {
             GraphicsEnvironment ge = GraphicsEnvironment.getLocalGraphicsEnvironment();
-            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, this.getClass().getResourceAsStream("/resources/fonts/crackman.ttf")));
+            ge.registerFont(Font.createFont(Font.TRUETYPE_FONT, Objects.requireNonNull(this.getClass().getResourceAsStream("/resources/fonts/crackman.ttf"))));
         } catch (IOException|FontFormatException e) {
             e.printStackTrace();
         }

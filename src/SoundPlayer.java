@@ -1,6 +1,7 @@
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
+import java.util.Objects;
 
 public class SoundPlayer {
     public static synchronized void playAsync(final String name) {
@@ -11,7 +12,7 @@ public class SoundPlayer {
                 try {
                     Clip clip = AudioSystem.getClip();
                     AudioInputStream inputStream = AudioSystem.getAudioInputStream(
-                            Main.class.getResourceAsStream("resources/sounds/" + name));
+                            Objects.requireNonNull(Main.class.getResourceAsStream("resources/sounds/" + name)));
                     clip.open(inputStream);
                     clip.start();
                 } catch (Exception e) {
@@ -25,7 +26,7 @@ public class SoundPlayer {
         try {
             Clip clip = AudioSystem.getClip();
             AudioInputStream inputStream = AudioSystem.getAudioInputStream(
-                    Main.class.getResourceAsStream("resources/sounds/" + name));
+                    Objects.requireNonNull(Main.class.getResourceAsStream("resources/sounds/" + name)));
             clip.open(inputStream);
             clip.start();
         } catch (Exception e) {
@@ -37,7 +38,7 @@ public class SoundPlayer {
         try {
             Clip clip = AudioSystem.getClip();
             AudioInputStream inputStream = AudioSystem.getAudioInputStream(
-                    Main.class.getResourceAsStream("resources/sounds/siren.wav"));
+                    Objects.requireNonNull(Main.class.getResourceAsStream("resources/sounds/siren.wav")));
             clip.open(inputStream);
             clip.loop(Clip.LOOP_CONTINUOUSLY);
         } catch (Exception e) {
