@@ -43,10 +43,7 @@ public abstract class Ghost {
         return isDead;
     }
 
-    //Image[] pac;
-    Image ghostImg;
     int activeImage = 0;
-    int addFactor = 1;
 
     public Point pixelPosition;
     public Point logicalPosition;

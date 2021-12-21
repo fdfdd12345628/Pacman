@@ -74,23 +74,6 @@ public class PacWindow extends JFrame {
     }
 
 
-    public int[][] loadMap(int mx,int my,String relPath){
-        try {
-            Scanner scn = new Scanner(Objects.requireNonNull(this.getClass().getResourceAsStream(relPath)));
-            int[][] map;
-            map = new int[mx][my];
-            for(int y=0;y<my;y++){
-                for(int x=0;x<mx;x++){
-                    map[x][y]=scn.nextInt();
-                }
-            }
-            return map;
-        }catch(Exception e){
-            System.err.println("Error Reading Map File !");
-        }
-        return null;
-    }
-
     public MapData getMapFromResource(String relPath){
         String mapStr = "";
         try {

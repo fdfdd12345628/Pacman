@@ -14,28 +14,9 @@ public class MapData {
     private ArrayList<TeleportTunnel> teleports;
     private ArrayList<GhostData> ghostsData;
 
-    public MapData(){
-        foodPositions = new ArrayList<>();
-        pufoodPositions = new ArrayList<>();
-        teleports = new ArrayList<>();
-        ghostsData = new ArrayList<>();
-    }
-
     public MapData(int x,int y){
         this.x = x;
         this.y = y;
-
-        foodPositions = new ArrayList<>();
-        pufoodPositions = new ArrayList<>();
-        teleports = new ArrayList<>();
-        ghostsData = new ArrayList<>();
-    }
-
-    public MapData(int x, int y,int[][] map,Point pacPosition){
-        this.x = x;
-        this.y = y;
-        this.map = map;
-        pacmanPosition = pacPosition;
 
         foodPositions = new ArrayList<>();
         pufoodPositions = new ArrayList<>();
@@ -47,16 +28,8 @@ public class MapData {
         return x;
     }
 
-    public void setX(int x) {
-        this.x = x;
-    }
-
     public int getY() {
         return y;
-    }
-
-    public void setY(int y) {
-        this.y = y;
     }
 
     public int[][] getMap() {
