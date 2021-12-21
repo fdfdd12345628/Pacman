@@ -1,9 +1,7 @@
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Objects;
-import java.util.concurrent.ThreadLocalRandom;
 
 public class RedGhost extends Ghost {
 

@@ -3,7 +3,6 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.util.Map;
 import java.util.Objects;
 import java.util.Scanner;
 

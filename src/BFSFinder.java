@@ -1,5 +1,4 @@
 import java.awt.*;
-import java.util.*;
 
 //Finds Path Between two Maze Points Using Breadth-Frist Search (BFS)
 public class BFSFinder {
