@@ -73,12 +73,7 @@ public class MapEditor extends JFrame {
 
 
         FansyButton startButton = new FansyButton("Start Game");
-        startButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                new PacWindow(compileMap(ta.getText()));
-            }
-        });
+        startButton.addActionListener(e -> new PacWindow(compileMap(ta.getText())));
         sideBar.add(startButton,BorderLayout.SOUTH);
         //setLayout(new Grid);
 
@@ -123,7 +118,7 @@ public class MapEditor extends JFrame {
             }
             if(c == '_'){
                 map[i][j] = 0;
-                customMap.getFoodPositions().add(new NormalFood(i,j));
+                customMap.getFoodPositions().add(new Food(i,j));
             }
             if(c == '='){
                 map[i][j] = 0;

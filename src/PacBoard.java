@@ -27,7 +27,7 @@ public class PacBoard extends JPanel{
     ArrayList<Ghost> ghosts;
     ArrayList<TeleportTunnel> teleports;
 
-    boolean isCustom = false;
+    boolean isCustom;
     boolean isGameOver = false;
     boolean isWin = false;
     boolean drawScore = false;
@@ -78,7 +78,7 @@ public class PacBoard extends JPanel{
             for (int i = 0; i < getM_x(); i++) {
                 for (int j = 0; j < getM_y(); j++) {
                     if (map[i][j] == 0)
-                        foods.add(new NormalFood(i, j));
+                        foods.add(new Food(i, j));
                 }
             }
         }else{
@@ -132,11 +132,9 @@ public class PacBoard extends JPanel{
         }catch(Exception e){}
 
 
-        redrawAL = new ActionListener() {
-            public void actionPerformed(ActionEvent evt) {
-                //Draw Board
-                repaint();
-            }
+        redrawAL = evt -> {
+            //Draw Board
+            repaint();
         };
         redrawTimer = new Timer(16,redrawAL);
         redrawTimer .start();
@@ -195,43 +193,49 @@ public class PacBoard extends JPanel{
                 foodToEat = f;
         }
         if(foodToEat!=null) {
-            if(foodToEat instanceof NormalFood) {
-                SoundPlayer.play("pacman_eat.wav");
-                foods.remove(foodToEat);
-                score++;
-                scoreboard.setText("    Score : " + score);
+            SoundPlayer.play("pacman_eat.wav");
+            foods.remove(foodToEat);
+            score ++;
+            scoreboard.setText("    Score : "+score);
 
-                if (foods.size() == 0) {
-                    siren.stop();
-                    pac6.stop();
-                    SoundPlayer.play("pacman_intermission.wav");
-                    isWin = true;
-                    pacman.moveTimer.stop();
-                    for (Ghost g : ghosts) {
-                        g.moveTimer.stop();
-                    }
-                }
-            }
-            else if(foodToEat instanceof PowerUpFood){
-                PowerUpFood powerUpFood = (PowerUpFood)foodToEat;
-                if (powerUpFood.type == 0) {//PACMAN 6
-                    pufoods.remove(powerUpFood);
-                    siren.stop();
-                    mustReactivateSiren = true;
-                    pac6.start();
-                    for (Ghost g : ghosts) {
-                        g.weaken();
-                    }
-                    scoreToAdd = 0;
-                } else {
-                    SoundPlayer.play("pacman_eatfruit.wav");
-                    pufoods.remove(powerUpFood);
-                    scoreToAdd = 1;
-                    drawScore = true;
+            if(foods.size() == 0){
+                siren.stop();
+                pac6.stop();
+                SoundPlayer.play("pacman_intermission.wav");
+                isWin = true;
+                pacman.moveTimer.stop();
+                for(Ghost g : ghosts){
+                    g.moveTimer.stop();
                 }
             }
         }
 
+        PowerUpFood puFoodToEat = null;
+        //Check pu food eat
+        for(PowerUpFood puf : pufoods){
+            if(pacman.logicalPosition.x == puf.position.x && pacman.logicalPosition.y == puf.position.y)
+                puFoodToEat = puf;
+        }
+        if(puFoodToEat!=null) {
+            //SoundPlayer.play("pacman_eat.wav");
+            if (puFoodToEat.type == 0) {//PACMAN 6
+                pufoods.remove(puFoodToEat);
+                siren.stop();
+                mustReactivateSiren = true;
+                pac6.start();
+                for (Ghost g : ghosts) {
+                    g.weaken();
+                }
+                scoreToAdd = 0;
+            } else {
+                SoundPlayer.play("pacman_eatfruit.wav");
+                pufoods.remove(puFoodToEat);
+                scoreToAdd = 1;
+                drawScore = true;
+            }
+            //score ++;
+            //scoreboard.setText("    Score : "+score);
+        }
 
         //Check Ghost Undie
         for(Ghost g:ghosts){
@@ -253,8 +257,9 @@ public class PacBoard extends JPanel{
         //Check isSiren
         boolean isSiren = true;
         for(Ghost g:ghosts){
-            if(g.isWeak()){
+            if (g.isWeak()) {
                 isSiren = false;
+                break;
             }
         }
         if(isSiren){
@@ -344,8 +349,8 @@ public class PacBoard extends JPanel{
             //System.out.println("must draw score !");
             g.setFont(new Font("Arial",Font.BOLD,15));
             g.setColor(Color.yellow);
-            Integer s = scoreToAdd*100;
-            g.drawString(s.toString(), pacman.pixelPosition.x + 13, pacman.pixelPosition.y + 50);
+            int s = scoreToAdd*100;
+            g.drawString(Integer.toString(s), pacman.pixelPosition.x + 13, pacman.pixelPosition.y + 50);
             //drawScore = false;
             score += s;
             scoreboard.setText("    Score : "+score);

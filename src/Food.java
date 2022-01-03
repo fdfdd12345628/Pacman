@@ -1,6 +1,9 @@
 import java.awt.*;
 
-public abstract class Food {
+/**
+ * Created by Armin on 4/11/2016.
+ */
+public class Food {
 
     public Point position;
 
