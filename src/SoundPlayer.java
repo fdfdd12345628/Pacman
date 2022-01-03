@@ -9,15 +9,7 @@ public class SoundPlayer {
             // The wrapper thread is unnecessary, unless it blocks on the
             // Clip finishing; see comments.
             public void run() {
-                try {
-                    Clip clip = AudioSystem.getClip();
-                    AudioInputStream inputStream = AudioSystem.getAudioInputStream(
-                            Objects.requireNonNull(Main.class.getResourceAsStream("resources/sounds/" + name)));
-                    clip.open(inputStream);
-                    clip.start();
-                } catch (Exception e) {
-                    System.err.println(e.getMessage());
-                }
+                play(name);
             }
         }).start();
     }
