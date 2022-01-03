@@ -51,7 +51,7 @@ public class PinkGhost extends Ghost {
             }
         }
         if(isDead) {
-            return baseReturner.getMove(logicalPosition.x,logicalPosition.y, parentBoard.ghostBase.x,parentBoard.ghostBase.y);
+            return baseReturner.getMove(logicalPosition.x,logicalPosition.y, parentBoard.getGhostBase().x, parentBoard.getGhostBase().y);
         }else {
             if (lastCMove == null || isStuck) {
                 ArrayList<moveType> pm = getPossibleMoves();

@@ -41,10 +41,10 @@ public class PacBoard extends JPanel{
     boolean mustReactivateSiren = false;
     LoopPlayer pac6;
 
-    public Point ghostBase;
+    private Point ghostBase;
 
-    public int m_x;
-    public int m_y;
+    private int m_x;
+    private int m_y;
 
     MapData md_backup;
     PacWindow windowParent;
@@ -55,12 +55,12 @@ public class PacBoard extends JPanel{
         md_backup = md;
         windowParent = pw;
         
-        m_x = md.getX();
-        m_y = md.getY();
+        setM_x(md.getX());
+        setM_y(md.getY());
         this.map = md.getMap();
 
         this.isCustom = md.isCustom();
-        this.ghostBase = md.getGhostBasePosition();
+        this.setGhostBase(md.getGhostBasePosition());
 
         //loadMap();
 
@@ -75,8 +75,8 @@ public class PacBoard extends JPanel{
         //TODO : read food from mapData (Map 1)
 
         if(!isCustom) {
-            for (int i = 0; i < m_x; i++) {
-                for (int j = 0; j < m_y; j++) {
+            for (int i = 0; i < getM_x(); i++) {
+                for (int j = 0; j < getM_y(); j++) {
                     if (map[i][j] == 0)
                         foods.add(new Food(i, j));
                 }
@@ -107,7 +107,7 @@ public class PacBoard extends JPanel{
         teleports = md.getTeleports();
 
         setLayout(null);
-        setSize(20*m_x,20*m_y);
+        setSize(20* getM_x(),20* getM_y());
         setBackground(Color.black);
 
         mapSegments = new Image[28];
@@ -172,7 +172,7 @@ public class PacBoard extends JPanel{
                         //getGraphics().setFont(new Font("Arial",Font.BOLD,20));
                         drawScore = true;
                         scoreToAdd++;
-                        if(ghostBase!=null)
+                        if(getGhostBase() !=null)
                             g.die();
                         else
                             ghostToRemove = g;
@@ -244,7 +244,7 @@ public class PacBoard extends JPanel{
 
         //Check Ghost Undie
         for(Ghost g:ghosts){
-            if(g.isDead() && g.logicalPosition.x == ghostBase.x && g.logicalPosition.y == ghostBase.y){
+            if(g.isDead() && g.logicalPosition.x == getGhostBase().x && g.logicalPosition.y == getGhostBase().y){
                 g.undie();
             }
         }
@@ -294,8 +294,8 @@ public class PacBoard extends JPanel{
 
         //Draw Walls
         g.setColor(Color.blue);
-        for(int i=0;i<m_x;i++){
-            for(int j=0;j<m_y;j++){
+        for(int i = 0; i< getM_x(); i++){
+            for(int j = 0; j< getM_y(); j++){
                 if(map[i][j]>0){
                     //g.drawImage(10+i*28,10+j*28,28,28);
                     g.drawImage(mapSegments[map[i][j]],10+i*28,10+j*28,null);
@@ -448,6 +448,27 @@ public class PacBoard extends JPanel{
     }
 
 
+    public Point getGhostBase() {
+        return ghostBase;
+    }
 
+    public void setGhostBase(Point ghostBase) {
+        this.ghostBase = ghostBase;
+    }
 
+    public int getM_x() {
+        return m_x;
+    }
+
+    public void setM_x(int m_x) {
+        this.m_x = m_x;
+    }
+
+    public int getM_y() {
+        return m_y;
+    }
+
+    public void setM_y(int m_y) {
+        this.m_y = m_y;
+    }
 }

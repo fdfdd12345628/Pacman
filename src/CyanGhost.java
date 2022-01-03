@@ -50,7 +50,7 @@ public class CyanGhost extends Ghost {
             }
         }
         if(isDead) {
-            return baseReturner.getMove(logicalPosition.x,logicalPosition.y, parentBoard.ghostBase.x,parentBoard.ghostBase.y);
+            return baseReturner.getMove(logicalPosition.x,logicalPosition.y, parentBoard.getGhostBase().x, parentBoard.getGhostBase().y);
         }else {
             ArrayList<moveType> pm = getPossibleMoves();
             int i = ThreadLocalRandom.current().nextInt(pm.size());

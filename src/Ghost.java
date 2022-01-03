@@ -150,10 +150,10 @@ public abstract class Ghost {
                 //TODO : fix ghost movements
                 switch(activeMove){
                     case RIGHT:
-                        if(pixelPosition.x >= (parentBoard.m_x-1) * 28){
+                        if(pixelPosition.x >= (parentBoard.getM_x() -1) * 28){
                             return;
                         }
-                        if((logicalPosition.x+1 < parentBoard.m_x) && (parentBoard.map[logicalPosition.x+1][logicalPosition.y]>0) && ((parentBoard.map[logicalPosition.x+1][logicalPosition.y]<26)||isPending)){
+                        if((logicalPosition.x+1 < parentBoard.getM_x()) && (parentBoard.map[logicalPosition.x+1][logicalPosition.y]>0) && ((parentBoard.map[logicalPosition.x+1][logicalPosition.y]<26)||isPending)){
                             return;
                         }
                         pixelPosition.x ++;
@@ -177,10 +177,10 @@ public abstract class Ghost {
                         pixelPosition.y--;
                         break;
                     case DOWN:
-                        if(pixelPosition.y >= (parentBoard.m_y-1) * 28){
+                        if(pixelPosition.y >= (parentBoard.getM_y() -1) * 28){
                             return;
                         }
-                        if((logicalPosition.y+1 < parentBoard.m_y) && (parentBoard.map[logicalPosition.x][logicalPosition.y+1]>0) && ((parentBoard.map[logicalPosition.x][logicalPosition.y+1]<26)||isPending)){
+                        if((logicalPosition.y+1 < parentBoard.getM_y()) && (parentBoard.map[logicalPosition.x][logicalPosition.y+1]>0) && ((parentBoard.map[logicalPosition.x][logicalPosition.y+1]<26)||isPending)){
                             return;
                         }
                         pixelPosition.y ++;
@@ -245,7 +245,7 @@ public abstract class Ghost {
     public ArrayList<moveType> getPossibleMoves(){
         ArrayList<moveType> possibleMoves = new ArrayList<>();
 
-        if(logicalPosition.x >= 0 && logicalPosition.x < parentBoard.m_x-1 && logicalPosition.y >= 0 && logicalPosition.y < parentBoard.m_y-1 ) {
+        if(logicalPosition.x >= 0 && logicalPosition.x < parentBoard.getM_x() -1 && logicalPosition.y >= 0 && logicalPosition.y < parentBoard.getM_y() -1 ) {
             //System.out.println(this.toString());
             if (!(parentBoard.map[logicalPosition.x + 1][logicalPosition.y] > 0)) {
                 possibleMoves.add(moveType.RIGHT);
