@@ -238,8 +238,23 @@ public abstract class Ghost {
     //load Images from Resource
     public abstract void loadImages();
 
+    moveType pendMove = moveType.UP;
     //get Move Based on AI
-    public abstract moveType getMoveAI();
+    public moveType getMoveAI(){
+        if(isPending){
+            if(isStuck){
+                if(pendMove == moveType.UP){
+                    pendMove = moveType.DOWN;
+                }else if(pendMove == moveType.DOWN){
+                    pendMove = moveType.UP;
+                }
+                return pendMove;
+            }else{
+                return pendMove;
+            }
+        }
+        return null;
+    };
 
     //get possible Moves
     public ArrayList<moveType> getPossibleMoves(){

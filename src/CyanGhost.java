@@ -33,22 +33,10 @@ public class CyanGhost extends Ghost {
     }
 
     moveType lastCMove;
-    moveType pendMove = moveType.UP;
 
     @Override
     public moveType getMoveAI(){
-        if(isPending){
-            if(isStuck){
-                if(pendMove == moveType.UP){
-                    pendMove = moveType.DOWN;
-                }else if(pendMove == moveType.DOWN){
-                    pendMove = moveType.UP;
-                }
-                return pendMove;
-            }else{
-                return pendMove;
-            }
-        }
+        super.getMoveAI();
         if(isDead) {
             return baseReturner.getMove(logicalPosition.x,logicalPosition.y, parentBoard.getGhostBase().x, parentBoard.getGhostBase().y);
         }else {
