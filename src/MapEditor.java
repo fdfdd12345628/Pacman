@@ -123,7 +123,7 @@ public class MapEditor extends JFrame {
             }
             if(c == '_'){
                 map[i][j] = 0;
-                customMap.getFoodPositions().add(new Food(i,j));
+                customMap.getFoodPositions().add(new NormalFood(i,j));
             }
             if(c == '='){
                 map[i][j] = 0;

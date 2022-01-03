@@ -78,7 +78,7 @@ public class PacBoard extends JPanel{
             for (int i = 0; i < getM_x(); i++) {
                 for (int j = 0; j < getM_y(); j++) {
                     if (map[i][j] == 0)
-                        foods.add(new Food(i, j));
+                        foods.add(new NormalFood(i, j));
                 }
             }
         }else{
@@ -195,35 +195,27 @@ public class PacBoard extends JPanel{
                 foodToEat = f;
         }
         if(foodToEat!=null) {
-            SoundPlayer.play("pacman_eat.wav");
-            foods.remove(foodToEat);
-            score ++;
-            scoreboard.setText("    Score : "+score);
+            if(foodToEat instanceof NormalFood) {
+                SoundPlayer.play("pacman_eat.wav");
+                foods.remove(foodToEat);
+                score++;
+                scoreboard.setText("    Score : " + score);
 
-            if(foods.size() == 0){
-                siren.stop();
-                pac6.stop();
-                SoundPlayer.play("pacman_intermission.wav");
-                isWin = true;
-                pacman.moveTimer.stop();
-                for(Ghost g : ghosts){
-                    g.moveTimer.stop();
+                if (foods.size() == 0) {
+                    siren.stop();
+                    pac6.stop();
+                    SoundPlayer.play("pacman_intermission.wav");
+                    isWin = true;
+                    pacman.moveTimer.stop();
+                    for (Ghost g : ghosts) {
+                        g.moveTimer.stop();
+                    }
                 }
             }
-        }
-
-        PowerUpFood puFoodToEat = null;
-        //Check pu food eat
-        for(PowerUpFood puf : pufoods){
-            if(pacman.logicalPosition.x == puf.position.x && pacman.logicalPosition.y == puf.position.y)
-                puFoodToEat = puf;
-        }
-        if(puFoodToEat!=null) {
-            //SoundPlayer.play("pacman_eat.wav");
-            switch(puFoodToEat.type) {
-                case 0:
-                    //PACMAN 6
-                    pufoods.remove(puFoodToEat);
+            else if(foodToEat instanceof PowerUpFood){
+                PowerUpFood powerUpFood = (PowerUpFood)foodToEat;
+                if (powerUpFood.type == 0) {//PACMAN 6
+                    pufoods.remove(powerUpFood);
                     siren.stop();
                     mustReactivateSiren = true;
                     pac6.start();
@@ -231,16 +223,15 @@ public class PacBoard extends JPanel{
                         g.weaken();
                     }
                     scoreToAdd = 0;
-                    break;
-                default:
+                } else {
                     SoundPlayer.play("pacman_eatfruit.wav");
-                    pufoods.remove(puFoodToEat);
+                    pufoods.remove(powerUpFood);
                     scoreToAdd = 1;
                     drawScore = true;
+                }
             }
-            //score ++;
-            //scoreboard.setText("    Score : "+score);
         }
+
 
         //Check Ghost Undie
         for(Ghost g:ghosts){

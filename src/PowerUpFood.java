@@ -1,11 +1,11 @@
 import java.awt.*;
 
-public class PowerUpFood {
+public class PowerUpFood extends Food {
 
     public Point position;
 
     public PowerUpFood(int x,int y,int type){
-        position = new Point(x,y);
+        super(x, y);
         this.type = type;
     }
 
